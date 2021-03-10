@@ -2,9 +2,9 @@ import {
   PAQUETE_LIST_REQUEST,
   PAQUETE_LIST_SUCCESS,
   PAQUETE_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
+  PAQUETE_DETAILS_REQUEST,
+  PAQUETE_DETAILS_SUCCESS,
+  PAQUETE_DETAILS_FAIL,
   PRODUCT_SAVE_REQUEST,
   PRODUCT_SAVE_SUCCESS,
   PRODUCT_SAVE_FAIL,
@@ -30,13 +30,13 @@ function paqueteListReducer(state = { paquetes: [] }, action) {
   }
 }
 
-function productDetailsReducer(state = { product: { reviews: [] } }, action) {
+function paqueteDetailsReducer(state = { paquete: { reviews: [] } }, action) {
   switch (action.type) {
-    case PRODUCT_DETAILS_REQUEST:
+    case PAQUETE_DETAILS_REQUEST:
       return { loading: true };
-    case PRODUCT_DETAILS_SUCCESS:
-      return { loading: false, product: action.payload };
-    case PRODUCT_DETAILS_FAIL:
+    case PAQUETE_DETAILS_SUCCESS:
+      return { loading: false, paquete: action.payload };
+    case PAQUETE_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -85,7 +85,7 @@ function productReviewSaveReducer(state = {}, action) {
 
 export {
   paqueteListReducer,
-  productDetailsReducer,
+  paqueteDetailsReducer,
   productSaveReducer,
   productDeleteReducer,
   productReviewSaveReducer,

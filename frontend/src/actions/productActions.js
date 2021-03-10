@@ -2,9 +2,9 @@ import {
   PAQUETE_LIST_REQUEST,
   PAQUETE_LIST_SUCCESS,
   PAQUETE_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
+  PAQUETE_DETAILS_REQUEST,
+  PAQUETE_DETAILS_SUCCESS,
+  PAQUETE_DETAILS_FAIL,
   PRODUCT_SAVE_REQUEST,
   PRODUCT_SAVE_SUCCESS,
   PRODUCT_SAVE_FAIL,
@@ -79,13 +79,13 @@ const saveProduct = (product) => async (dispatch, getState) => {
   }
 };
 
-const detailsProduct = (productId) => async (dispatch) => {
+const detailsPaquete = (paqueteId) => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
-    const { data } = await axios.get("/api/products/" + productId);
-    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({ type: PAQUETE_DETAILS_REQUEST, payload: paqueteId });
+    const { data } = await axios.get("/api/paquete/" + paqueteId);
+    dispatch({ type: PAQUETE_DETAILS_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
+    dispatch({ type: PAQUETE_DETAILS_FAIL, payload: error.message });
   }
 };
 
@@ -132,7 +132,7 @@ const saveProductReview = (productId, review) => async (dispatch, getState) => {
 
 export {
   listPaquetes,
-  detailsProduct,
+  detailsPaquete,
   saveProduct,
   deleteProdcut,
   saveProductReview,

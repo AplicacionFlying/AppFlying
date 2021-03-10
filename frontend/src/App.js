@@ -30,7 +30,7 @@ function App() {
       <div className="grid-container">
         <header className="header">
           <div className="brand">
-            <button onClick={openMenu}>&#9776;</button>
+            {/* <button onClick={openMenu}>&#9776;</button> */}
             <Link to="/">Flying</Link>
           </div>
           <div className="header-links">
@@ -38,7 +38,7 @@ function App() {
             {userInfo ? (
               <Link to="/profile">{userInfo.name}</Link>
             ) : (
-              <Link to="/signin">Ingresar</Link>
+              <Link to="/signin">Login</Link>
             )}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">

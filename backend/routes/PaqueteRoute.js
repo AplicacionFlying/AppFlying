@@ -31,11 +31,11 @@ router.get("/", async (req, res) => {
 // });
 
 router.get("/:id", async (req, res) => {
-  const product = await Product.findOne({ _id: req.params.id });
-  if (product) {
-    res.send(product);
+  const paquete = await Paquete.findOne({ _id: req.params.id });
+  if (paquete) {
+    res.send(paquete);
   } else {
-    res.status(404).send({ message: "Product Not Found." });
+    res.status(404).send({ message: "Paquete Not Found." });
   }
 });
 router.post("/:id/reviews", isAuth, async (req, res) => {

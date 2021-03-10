@@ -58,36 +58,36 @@ function HomeScreen(props) {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <ul className="products">
+        <ul className="paquetes">
           {paquetes.map((paquete) => (
             <li key={paquete._id}>
-              <div className="product">
+              <div className="paquete">
                 <Link to={"/product/" + paquete._id}>
                   <img
-                    className="product-image"
+                    className="paquete-image"
                     src={paquete.image}
                     alt="product"
                   />
                 </Link>
-                <div className="product-name">
+                <div className="paquete-name">
                   <Link to={"/product/" + paquete._id}>{paquete.name}</Link>
                 </div>
-                <div className="product-brand">{paquete.description}</div>
+                <div className="paquete-brand">{paquete.description}</div>
 
-                <div className="product-price">${paquete.price}</div>
+                <div className="paquete-price">${paquete.price}</div>
                 <div>
                   <span>Salida</span>
                 </div>
-                <div className="product-brand">{paquete.paisOrigen}</div>
-                <div className="product-brand">{paquete.fechaOrigen}</div>
-                <div className="product-brand">{paquete.horaOrigen}</div>
+                <div className="paquete-brand">{paquete.paisOrigen}</div>
+                <div className="paquete-brand">{paquete.fechaOrigen}</div>
+                <div className="paquete-brand">{paquete.horaOrigen}</div>
                 <div>
                   <span>Llegada</span>
                 </div>
-                <div className="product-brand">{paquete.paisDestino}</div>
-                <div className="product-brand">{paquete.fechaDestino}</div>
-                <div className="product-brand">{paquete.horaDestino}</div>
-                <div className="product-rating">
+                <div className="paquete-brand">{paquete.paisDestino}</div>
+                <div className="paquete-brand">{paquete.fechaDestino}</div>
+                <div className="paquete-brand">{paquete.horaDestino}</div>
+                <div className="paquete-rating">
                   <Rating
                   // value={product.rating}
                   // text={product.numReviews + " reviews"}

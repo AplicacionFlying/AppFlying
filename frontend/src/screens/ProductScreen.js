@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { detailsProduct, saveProductReview } from '../actions/productActions';
-import Rating from '../components/Rating';
-import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { detailsPaquete, saveProductReview } from "../actions/productActions";
+import Rating from "../components/Rating";
+import { PRODUCT_REVIEW_SAVE_RESET } from "../constants/productConstants";
 
 function ProductScreen(props) {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-  const productDetails = useSelector((state) => state.productDetails);
-  const { product, loading, error } = productDetails;
+  const paqueteDetails = useSelector((state) => state.paqueteDetails);
+  const { paquete, loading, error } = paqueteDetails;
   const productReviewSave = useSelector((state) => state.productReviewSave);
   const { success: productSaveSuccess } = productReviewSave;
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (productSaveSuccess) {
-      alert('Review submitted successfully.');
+      alert("Review submitted successfully.");
       setRating(0);
-      setComment('');
+      setComment("");
       dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
     }
-    dispatch(detailsProduct(props.match.params.id));
+    dispatch(detailsPaquete(props.match.params.id));
     return () => {
       //
     };
@@ -41,13 +41,13 @@ function ProductScreen(props) {
     );
   };
   const handleAddToCart = () => {
-    props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   };
 
   return (
     <div>
       <div className="back-to-result">
-        <Link to="/">Back to result</Link>
+        <Link to="/">Volver atras</Link>
       </div>
       {loading ? (
         <div>Loading...</div>
@@ -57,46 +57,64 @@ function ProductScreen(props) {
         <>
           <div className="details">
             <div className="details-image">
-              <img src={product.image} alt="product"></img>
+              <img src={paquete.image} alt="product"></img>
             </div>
             <div className="details-info">
               <ul>
                 <li>
-                  <h4>{product.name}</h4>
+                  <h4>Paquede de viaje a {paquete.name}</h4>
                 </li>
                 <li>
                   <a href="#reviews">
                     <Rating
-                      value={product.rating}
-                      text={product.numReviews + ' reviews'}
+                    // value={product.rating}
+                    // text={product.numReviews + " reviews"}
                     />
                   </a>
                 </li>
                 <li>
-                  Price: <b>${product.price}</b>
+                  Precio: <b>${paquete.price}</b>
                 </li>
                 <li>
-                  Description:
-                  <div>{product.description}</div>
+                  Pais de salida :<div>{paquete.paisOrigen}</div>
+                </li>
+                <li>
+                  Fecha de salida:
+                  <div>{paquete.fechaOrigen}</div>
+                </li>
+                <li>
+                  Hora de salida:
+                  <div>{paquete.horaOrigen}</div>
+                </li>
+                <li>
+                  Pais de destino:
+                  <div>{paquete.paisDestino}</div>
+                </li>
+                <li>
+                  Fecha de llegada:
+                  <div>{paquete.fechaDestino}</div>
+                </li>
+                <li>
+                  Hora de llegada:
+                  <div>{paquete.horaDestino}</div>
                 </li>
               </ul>
             </div>
             <div className="details-action">
               <ul>
-                <li>Price: {product.price}</li>
+                <li>Price: {paquete.price}</li>
                 <li>
-                  Status:{' '}
-                  {product.countInStock > 0 ? 'In Stock' : 'Unavailable.'}
+                  Status:{" "}
+                  {paquete.countInStock > 0 ? "In Stock" : "Unavailable."}
                 </li>
                 <li>
-                  Qty:{' '}
+                  Qty:{" "}
                   <select
                     value={qty}
                     onChange={(e) => {
                       setQty(e.target.value);
-                    }}
-                  >
-                    {[...Array(product.countInStock).keys()].map((x) => (
+                    }}>
+                    {[...Array(paquete.countInStock).keys()].map((x) => (
                       <option key={x + 1} value={x + 1}>
                         {x + 1}
                       </option>
@@ -104,11 +122,10 @@ function ProductScreen(props) {
                   </select>
                 </li>
                 <li>
-                  {product.countInStock > 0 && (
+                  {paquete.countInStock > 0 && (
                     <button
                       onClick={handleAddToCart}
-                      className="button primary"
-                    >
+                      className="button primary">
                       Add to Cart
                     </button>
                   )}
@@ -118,9 +135,9 @@ function ProductScreen(props) {
           </div>
           <div className="content-margined">
             <h2>Reviews</h2>
-            {!product.reviews.length && <div>There is no review</div>}
+            {!paquete.reviews.length && <div>There is no review</div>}
             <ul className="review" id="reviews">
-              {product.reviews.map((review) => (
+              {paquete.reviews.map((review) => (
                 <li key={review._id}>
                   <div>{review.name}</div>
                   <div>
@@ -141,8 +158,7 @@ function ProductScreen(props) {
                           name="rating"
                           id="rating"
                           value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
+                          onChange={(e) => setRating(e.target.value)}>
                           <option value="1">1- Poor</option>
                           <option value="2">2- Fair</option>
                           <option value="3">3- Good</option>
@@ -155,8 +171,9 @@ function ProductScreen(props) {
                         <textarea
                           name="comment"
                           value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
+                          onChange={(e) =>
+                            setComment(e.target.value)
+                          }></textarea>
                       </li>
                       <li>
                         <button type="submit" className="button primary">

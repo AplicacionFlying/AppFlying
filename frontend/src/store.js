@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import Cookie from "js-cookie";
 import {
   paqueteListReducer,
-  productDetailsReducer,
+  paqueteDetailsReducer,
   productSaveReducer,
   productDeleteReducer,
   productReviewSaveReducer,
@@ -32,7 +32,7 @@ const initialState = {
 };
 const reducer = combineReducers({
   paqueteList: paqueteListReducer,
-  productDetails: productDetailsReducer,
+  paqueteDetails: paqueteDetailsReducer,
   cart: cartReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
