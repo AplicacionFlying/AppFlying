@@ -34,7 +34,7 @@ function App() {
             <Link to="/">Flying</Link>
           </div>
           <div className="header-links">
-            <a href="cart.html">Pasajes</a>
+            <a href="/cart">Pasajes</a>
             {userInfo ? (
               <Link to="/profile">{userInfo.name}</Link>
             ) : (
@@ -45,7 +45,7 @@ function App() {
                 <a href="#">Admin</a>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/orders">Ordenes</Link>
+                    <Link to="/orders">Ventas</Link>
                     <Link to="/products">Paquetes</Link>
                   </li>
                 </ul>

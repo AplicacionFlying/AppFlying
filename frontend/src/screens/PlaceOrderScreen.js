@@ -94,7 +94,7 @@ function PlaceOrderScreen(props) {
               </button>
             </li>
             <li>
-              <h3>Resumen de la orden</h3>
+              <h3>Resumen de la compra</h3>
             </li>
             <li>
               <div>Items</div>
@@ -106,7 +106,7 @@ function PlaceOrderScreen(props) {
               <div>${taxPrice}</div>
             </li>
             <li>
-              <div>Order Total</div>
+              <div>Pago Total</div>
               <div>${totalPrice}</div>
             </li>
           </ul>
