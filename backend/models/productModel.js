@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -10,23 +10,25 @@ const reviewSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const paqueteSchema = new mongoose.Schema({
+const prodctSchema = new mongoose.Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
+  //brand: { type: String, required: true },
   price: { type: Number, default: 0, required: true },
+  //category: { type: String, required: true },
+  origen: { type: String, required: true },
+  horaOrigen:{ type: Number, default: 0, required: true },
+  fechaOrigen: { type: Number, default: 0, required: true },
+  destino: { type: String, required: true },
+  horaDestino:{ type: Number, default: 0, required: true },
+  fechaDestino:{ type: Number, default: 0, required: true },
   countInStock: { type: Number, default: 0, required: true },
   description: { type: String, required: true },
   rating: { type: Number, default: 0, required: true },
   numReviews: { type: Number, default: 0, required: true },
-  paisOrigen: { type: String, require: true },
-  fechaOrigen: { type: String, requiere: true },
-  horaOrigen: { type: String, requiere: true },
-  paisDestino: { type: String, require: true },
-  fechaDestino: { type: String, requiere: true },
-  horaDestino: { type: String, requiere: true },
   reviews: [reviewSchema],
 });
 
-const paqueteModel = mongoose.model("Paquete", paqueteSchema);
+const productModel = mongoose.model('Product', prodctSchema);
 
-export default paqueteModel;
+export default productModel;
