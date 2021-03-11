@@ -4,8 +4,8 @@ import Cookie from "js-cookie";
 import {
   paqueteListReducer,
   paqueteDetailsReducer,
-  productSaveReducer,
-  productDeleteReducer,
+  paqueteSaveReducer,
+  paqueteDeleteReducer,
   productReviewSaveReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
@@ -36,8 +36,8 @@ const reducer = combineReducers({
   cart: cartReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
-  productSave: productSaveReducer,
-  productDelete: productDeleteReducer,
+  paqueteSave: paqueteSaveReducer,
+  paqueteDelete: paqueteDeleteReducer,
   productReviewSave: productReviewSaveReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,

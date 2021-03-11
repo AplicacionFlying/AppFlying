@@ -82,9 +82,9 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
 });
 
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
-  const deletedProduct = await Product.findById(req.params.id);
-  if (deletedProduct) {
-    await deletedProduct.remove();
+  const deletedPaquete = await Paquete.findById(req.params.id);
+  if (deletedPaquete) {
+    await deletedPaquete.remove();
     res.send({ message: "Product Deleted" });
   } else {
     res.send("Error in Deletion.");

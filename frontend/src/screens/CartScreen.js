@@ -30,7 +30,7 @@ function CartScreen(props) {
       <div className="cart-list">
         <ul className="cart-list-container">
           <li>
-            <h3>Pasajes Cart</h3>
+            <h3>Pasajes </h3>
             <div>Precio</div>
           </li>
           {cartItems.length === 0 ? (
@@ -46,7 +46,7 @@ function CartScreen(props) {
                     <Link to={"/product/" + item.product}>{item.name}</Link>
                   </div>
                   <div>
-                    Qty:
+                    Cantidad:
                     <select
                       value={item.qty}
                       onChange={(e) =>

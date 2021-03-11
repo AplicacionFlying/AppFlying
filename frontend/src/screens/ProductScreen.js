@@ -62,7 +62,7 @@ function ProductScreen(props) {
             <div className="details-info">
               <ul>
                 <li>
-                  <h4>Paquede de viaje a {paquete.name}</h4>
+                  <h4>Paquete de viaje a {paquete.name}</h4>
                 </li>
                 <li>
                   <a href="#reviews">
@@ -102,13 +102,13 @@ function ProductScreen(props) {
             </div>
             <div className="details-action">
               <ul>
-                <li>Price: {paquete.price}</li>
+                <li>Precio: {paquete.price}</li>
                 <li>
                   Status:{" "}
                   {paquete.countInStock > 0 ? "In Stock" : "Unavailable."}
                 </li>
                 <li>
-                  Qty:{" "}
+                  Cantidad:{" "}
                   <select
                     value={qty}
                     onChange={(e) => {
@@ -126,7 +126,7 @@ function ProductScreen(props) {
                     <button
                       onClick={handleAddToCart}
                       className="button primary">
-                      Add to Cart
+                      Agregar pasajes
                     </button>
                   )}
                 </li>

@@ -70,7 +70,9 @@ function HomeScreen(props) {
                   />
                 </Link>
                 <div className="paquete-name">
-                  <Link to={"/product/" + paquete._id}>{paquete.name}</Link>
+                  <Link to={"/product/" + paquete._id}>
+                    Argentina a {paquete.name}
+                  </Link>
                 </div>
                 <div className="paquete-brand">{paquete.description}</div>
 

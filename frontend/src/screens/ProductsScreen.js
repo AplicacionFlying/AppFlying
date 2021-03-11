@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
-  saveProduct,
+  savePaquete,
   listPaquetes,
-  deleteProdcut,
+  deletePaquete,
 } from "../actions/productActions";
 
 function ProductsScreen(props) {
@@ -13,27 +13,31 @@ function ProductsScreen(props) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [brand, setBrand] = useState("");
-  const [category, setCategory] = useState("");
+  const [paisOrigen, setOrigen] = useState("");
+  const [horaOrigen, setHoraOrigen] = useState("");
+  const [fechaOrigen, setFechaOrigen] = useState("");
+  const [paisDestino, setDestino] = useState("");
+  const [horaDestino, setHoraDestino] = useState("");
+  const [fechaDestino, setFechaDestino] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
-  const productList = useSelector((state) => state.productList);
-  const { loading, products, error } = productList;
+  const paqueteList = useSelector((state) => state.paqueteList);
+  const { loading, paquetes, error } = paqueteList;
 
-  const productSave = useSelector((state) => state.productSave);
+  const paqueteSave = useSelector((state) => state.paqueteSave);
   const {
     loading: loadingSave,
     success: successSave,
     error: errorSave,
-  } = productSave;
+  } = paqueteSave;
 
-  const productDelete = useSelector((state) => state.productDelete);
+  const paqueteDelete = useSelector((state) => state.paqueteDelete);
   const {
     loading: loadingDelete,
     success: successDelete,
     error: errorDelete,
-  } = productDelete;
+  } = paqueteDelete;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,27 +57,35 @@ function ProductsScreen(props) {
     setPrice(product.price);
     setDescription(product.description);
     setImage(product.image);
-    setBrand(product.brand);
-    setCategory(product.category);
+    setOrigen(product.paisOrigen);
+    setHoraOrigen(product.horaOrigen);
+    setFechaOrigen(product.fechaOrigen);
+    setDestino(product.paisDestino);
+    setHoraDestino(product.horaDestino);
+    setFechaDestino(product.fechaDestino);
     setCountInStock(product.countInStock);
   };
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveProduct({
+      savePaquete({
         _id: id,
         name,
         price,
         image,
-        brand,
-        category,
+        paisOrigen,
+        horaOrigen,
+        fechaOrigen,
+        paisDestino,
+        horaDestino,
+        fechaDestino,
         countInStock,
         description,
       })
     );
   };
-  const deleteHandler = (product) => {
-    dispatch(deleteProdcut(product._id));
+  const deleteHandler = (paquete) => {
+    dispatch(deletePaquete(paquete._id));
   };
   const uploadFileHandler = (e) => {
     const file = e.target.files[0];
@@ -98,9 +110,9 @@ function ProductsScreen(props) {
   return (
     <div className="content content-margined">
       <div className="product-header">
-        <h3>Products</h3>
+        <h3>Paquetes</h3>
         <button className="button primary" onClick={() => openModal({})}>
-          Create Product
+          Crear paquete
         </button>
       </div>
       {modalVisible && (
@@ -108,7 +120,7 @@ function ProductsScreen(props) {
           <form onSubmit={submitHandler}>
             <ul className="form-container">
               <li>
-                <h2>Create Product</h2>
+                <h2>Crear paquete de viaje</h2>
               </li>
               <li>
                 {loadingSave && <div>Loading...</div>}
@@ -116,7 +128,7 @@ function ProductsScreen(props) {
               </li>
 
               <li>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Nombre del paquete</label>
                 <input
                   type="text"
                   name="name"
@@ -125,7 +137,7 @@ function ProductsScreen(props) {
                   onChange={(e) => setName(e.target.value)}></input>
               </li>
               <li>
-                <label htmlFor="price">Price</label>
+                <label htmlFor="price">Precio del paquete</label>
                 <input
                   type="text"
                   name="price"
@@ -134,7 +146,7 @@ function ProductsScreen(props) {
                   onChange={(e) => setPrice(e.target.value)}></input>
               </li>
               <li>
-                <label htmlFor="image">Image</label>
+                <label htmlFor="image">Imagen</label>
                 <input
                   type="text"
                   name="image"
@@ -145,13 +157,58 @@ function ProductsScreen(props) {
                 {uploading && <div>Uploading...</div>}
               </li>
               <li>
-                <label htmlFor="brand">Brand</label>
+                <label htmlFor="origen">Lugar de origen</label>
                 <input
                   type="text"
-                  name="brand"
-                  value={brand}
-                  id="brand"
-                  onChange={(e) => setBrand(e.target.value)}></input>
+                  name="origen"
+                  value={paisOrigen}
+                  id="origen"
+                  onChange={(e) => setOrigen(e.target.value)}></input>
+              </li>
+              <li>
+                <label htmlFor="horaOrigen">Hora de origen</label>
+                <input
+                  type="text"
+                  name="horaOrigen"
+                  value={horaOrigen}
+                  id="horaOrigen"
+                  onChange={(e) => setHoraOrigen(e.target.value)}></input>
+              </li>
+              <li>
+                <label htmlFor="fechaOrigen">Fecha de origen</label>
+                <input
+                  type="text"
+                  name="fechaOrigen"
+                  value={fechaOrigen}
+                  id="fechaOrigen"
+                  onChange={(e) => setFechaOrigen(e.target.value)}></input>
+              </li>
+              <li>
+                <label htmlFor="destino">Lugar de destino</label>
+                <input
+                  type="text"
+                  name="destino"
+                  value={paisDestino}
+                  id="destino"
+                  onChange={(e) => setDestino(e.target.value)}></input>
+              </li>
+              <li>
+                <label htmlFor="horaDestino">Hora de destino</label>
+                <input
+                  type="text"
+                  name="horaDestino"
+                  value={horaDestino}
+                  id="horaDestino"
+                  onChange={(e) => setHoraDestino(e.target.value)}></input>
+              </li>
+              <li>
+                <label htmlFor="fechaDestino">Fecha de destino</label>
+                <input
+                  type="text"
+                  name="fechaDestino"
+                  value={fechaDestino}
+                  id="fechaDestino"
+                  onChange={(e) => setFechaDestino(e.target.value)}></input>
               </li>
               <li>
                 <label htmlFor="countInStock">CountInStock</label>
@@ -162,17 +219,9 @@ function ProductsScreen(props) {
                   id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}></input>
               </li>
+
               <li>
-                <label htmlFor="name">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={category}
-                  id="category"
-                  onChange={(e) => setCategory(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">Descripcion</label>
                 <textarea
                   name="description"
                   value={description}
@@ -189,7 +238,7 @@ function ProductsScreen(props) {
                   type="button"
                   onClick={() => setModalVisible(false)}
                   className="button secondary">
-                  Back
+                  Atras
                 </button>
               </li>
             </ul>
@@ -204,27 +253,36 @@ function ProductsScreen(props) {
               <th>ID</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Category</th>
-              <th>Brand</th>
+              <th>Origen</th>
+              <th>HoraOrigen</th>
+              <th>FechaOrigen</th>
+              <th>Destino</th>
+              <th>HoraDestino</th>
+              <th>FechaDestino</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
+            {paquetes.map((paquete) => (
+              <tr key={paquete._id}>
+                <td>{paquete._id}</td>
+                <td>{paquete.name}</td>
+                <td>{paquete.price}</td>
+                <td>{paquete.paisOrigen}</td>
+                <td>{paquete.horaOrigen}</td>
+                <td>{paquete.fechaOrigen}</td>
+                <td>{paquete.paisDestino}</td>
+                <td>{paquete.horaDestino}</td>
+                <td>{paquete.fechaDestino}</td>
+
                 <td>
-                  <button className="button" onClick={() => openModal(product)}>
-                    Edit
+                  <button className="button" onClick={() => openModal(paquete)}>
+                    Editar
                   </button>{" "}
                   <button
                     className="button"
-                    onClick={() => deleteHandler(product)}>
-                    Delete
+                    onClick={() => deleteHandler(paquete)}>
+                    Eliminar
                   </button>
                 </td>
               </tr>
