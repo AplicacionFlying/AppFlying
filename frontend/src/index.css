@@ -68,6 +68,12 @@ a:hover {
   color: #ff8000;
 }
 /* Home Screen */
+.two-columns {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+
 .paquetes {
   display: flex;
   justify-content: center;
@@ -77,7 +83,7 @@ a:hover {
 }
 .paquetes li {
   list-style-type: none;
-  padding: 0;
+  padding: 3px;
   flex: 0 1 34rem;
   margin: 1rem;
   height: 50rem;
@@ -93,6 +99,10 @@ a:hover {
 }
 .paquete-name {
   font-size: 2rem;
+  font-weight: bold;
+}
+.paquete-name-colum {
+  font-size: 1rem;
   font-weight: bold;
 }
 .paquete-brand {

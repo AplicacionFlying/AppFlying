@@ -74,26 +74,53 @@ function HomeScreen(props) {
                     Argentina a {paquete.name}
                   </Link>
                 </div>
+
                 <div className="paquete-brand">{paquete.description}</div>
 
                 <div className="paquete-price">${paquete.price}</div>
-                <div>
-                  <span>Salida</span>
-                </div>
-                <div className="paquete-brand">{paquete.paisOrigen}</div>
-                <div className="paquete-brand">{paquete.fechaOrigen}</div>
-                <div className="paquete-brand">{paquete.horaOrigen}</div>
-                <div>
-                  <span>Llegada</span>
-                </div>
-                <div className="paquete-brand">{paquete.paisDestino}</div>
-                <div className="paquete-brand">{paquete.fechaDestino}</div>
-                <div className="paquete-brand">{paquete.horaDestino}</div>
-                <div className="paquete-rating">
-                  <Rating
-                  // value={product.rating}
-                  // text={product.numReviews + " reviews"}
-                  />
+                <div class="two-columns">
+                  <div className="colum">
+                    <div className="paquete-name-colum">Ida</div>
+                    <div>
+                      <span>Salida</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisOrigen}</div>
+                    <div className="paquete-brand">{paquete.fechaOrigen}</div>
+                    <div className="paquete-brand">{paquete.horaOrigen}</div>
+                    <div>
+                      <span>Llegada</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisDestino}</div>
+                    <div className="paquete-brand">{paquete.fechaDestino}</div>
+                    <div className="paquete-brand">{paquete.horaDestino}</div>
+                    <div className="paquete-rating">
+                      <Rating
+                      // value={product.rating}
+                      // text={product.numReviews + " reviews"}
+                      />
+                    </div>
+                  </div>
+                  <div className="colum">
+                    <div className="paquete-name-colum">Vuelta</div>
+                    <div>
+                      <span>Salida</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisOrigen}</div>
+                    <div className="paquete-brand">{paquete.fechaOrigen}</div>
+                    <div className="paquete-brand">{paquete.horaOrigen}</div>
+                    <div>
+                      <span>Llegada</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisDestino}</div>
+                    <div className="paquete-brand">{paquete.fechaDestino}</div>
+                    <div className="paquete-brand">{paquete.horaDestino}</div>
+                    <div className="paquete-rating">
+                      <Rating
+                      // value={product.rating}
+                      // text={product.numReviews + " reviews"}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
