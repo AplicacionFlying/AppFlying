@@ -78,21 +78,27 @@ function HomeScreen(props) {
                 <div className="paquete-brand">{paquete.description}</div>
 
                 <div className="paquete-price">${paquete.price}</div>
-                <div class="two-columns">
+                <div className="two-columns">
                   <div className="colum">
                     <div className="paquete-name-colum">Ida</div>
                     <div>
                       <span>Salida</span>
                     </div>
                     <div className="paquete-brand">{paquete.paisOrigen}</div>
-                    <div className="paquete-brand">{paquete.fechaOrigen}</div>
-                    <div className="paquete-brand">{paquete.horaOrigen}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaOrigenIda}
+                    </div>
+                    <div className="paquete-brand">{paquete.horaOrigenIda}</div>
                     <div>
                       <span>Llegada</span>
                     </div>
                     <div className="paquete-brand">{paquete.paisDestino}</div>
-                    <div className="paquete-brand">{paquete.fechaDestino}</div>
-                    <div className="paquete-brand">{paquete.horaDestino}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaDestinoIda}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaDestinoIda}
+                    </div>
                     <div className="paquete-rating">
                       <Rating
                       // value={product.rating}
@@ -105,15 +111,23 @@ function HomeScreen(props) {
                     <div>
                       <span>Salida</span>
                     </div>
-                    <div className="paquete-brand">{paquete.paisOrigen}</div>
-                    <div className="paquete-brand">{paquete.fechaOrigen}</div>
-                    <div className="paquete-brand">{paquete.horaOrigen}</div>
+                    <div className="paquete-brand">{paquete.paisDestino}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaOrigenVuelta}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaOrigenVuelta}
+                    </div>
                     <div>
                       <span>Llegada</span>
                     </div>
-                    <div className="paquete-brand">{paquete.paisDestino}</div>
-                    <div className="paquete-brand">{paquete.fechaDestino}</div>
-                    <div className="paquete-brand">{paquete.horaDestino}</div>
+                    <div className="paquete-brand">{paquete.paisOrigen}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaDestinoVuelta}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaDestinoVuelta}
+                    </div>
                     <div className="paquete-rating">
                       <Rating
                       // value={product.rating}

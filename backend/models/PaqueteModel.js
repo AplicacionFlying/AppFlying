@@ -19,11 +19,16 @@ const paqueteSchema = new mongoose.Schema({
   rating: { type: Number, default: 0, required: true },
   numReviews: { type: Number, default: 0, required: true },
   paisOrigen: { type: String, require: true },
-  fechaOrigen: { type: String, requiere: true },
-  horaOrigen: { type: String, requiere: true },
+  fechaOrigenIda: { type: String, requiere: true },
+  horaOrigenIda: { type: String, requiere: true },
   paisDestino: { type: String, require: true },
-  fechaDestino: { type: String, requiere: true },
-  horaDestino: { type: String, requiere: true },
+  fechaDestinoIda: { type: String, requiere: true },
+  horaDestinoIda: { type: String, requiere: true },
+  fechaOrigenVuelta: { type: String, requiere: true },
+  horaOrigenVuelta: { type: String, requiere: true },
+  fechaDestinoVuelta: { type: String, requiere: true },
+  horaDestinoVuelta: { type: String, requiere: true },
+
   reviews: [reviewSchema],
 });
 

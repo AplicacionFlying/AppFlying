@@ -295,6 +295,49 @@ a > .rating > span:last-child {
   font-size: 2.5rem;
   text-align: right;
 }
+/* forms producto */
+.form-product .two-columns {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  display: flex;
+}
+.form-product .form-container .colum-campos {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-left: 15%;
+}
+.form-product .form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.form-product .form-container {
+  display: flex;
+  flex-direction: column;
+  width: 70rem;
+  height: 100%;
+  padding: 0;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+  text-align: center;
+}
+.form-product .form-container li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.form-product input {
+  padding: 1rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  width: 225px !important;
+}
 
 /* forms */
 

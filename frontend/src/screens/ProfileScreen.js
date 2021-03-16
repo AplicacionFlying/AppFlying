@@ -3,11 +3,22 @@ import { Link } from "react-router-dom";
 import { logout, update } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
+import { validateEmail, validarPassword } from "../helpers";
+import { push } from "docker-compose";
 
 function ProfileScreen(props) {
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorEmailRequerido, setErrorEmailRequerido] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorPasswordRequerido, setErrorPasswordRequerido] = useState("");
+  const [errorPasswordComfir, setErrorPasswordComfir] = useState("");
+  const [errorNameRequerido, setErrorNameRequerido] = useState("");
+  const [errors, setErrors] = useState(false);
+
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const dispatch = useDispatch();
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -18,7 +29,15 @@ function ProfileScreen(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(update({ userId: userInfo._id, email, name, password }));
+    setErrors(validateData());
+
+    if (!errors) {
+      return;
+    }
+    if (errors) {
+      dispatch(update({ userId: userInfo._id, email, name, password }));
+      //props.history.push("http://localhost:3000");
+    }
   };
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, success, error } = userUpdate;
@@ -35,6 +54,45 @@ function ProfileScreen(props) {
     dispatch(listMyOrders());
     return () => {};
   }, [userInfo]);
+
+  const validateData = () => {
+    setErrorNameRequerido("");
+    setErrorEmailRequerido("");
+    setErrorEmail("");
+    setErrorPasswordRequerido("");
+    setErrorPassword("");
+    setErrorPasswordComfir("");
+
+    //setErrorPassword("");
+    let isValid = true;
+    if (name === "") {
+      setErrorNameRequerido("Debe ingresar un nombre");
+      isValid = false;
+    }
+    if (email === "") {
+      setErrorEmailRequerido("Debe ingresar un email");
+      isValid = false;
+    }
+    if (email !== "" && !validateEmail(email)) {
+      setErrorEmail("Debes de ingresar un email válido.");
+      isValid = false;
+    }
+
+    if (password === "") {
+      setErrorPasswordRequerido("Debe ingresar los datos");
+      isValid = false;
+    }
+    if (password !== "" && !validarPassword(password))
+      if (rePassword === "") {
+        setErrorPasswordRequerido("La contraseña debe tener minimo 4 digitos");
+        isValid = false;
+      }
+    if (password !== rePassword) {
+      setErrorPasswordComfir("La contraseña y la confirmación no son iguales.");
+      isValid = false;
+    }
+    return isValid;
+  };
 
   return (
     <div className="profile">
@@ -60,6 +118,9 @@ function ProfileScreen(props) {
                   onChange={(e) => setName(e.target.value)}></input>
               </li>
               <li>
+                {!errors ? <span>{errorNameRequerido}</span> : <span></span>}
+              </li>
+              <li>
                 <label htmlFor="email">Email</label>
                 <input
                   value={email}
@@ -69,6 +130,10 @@ function ProfileScreen(props) {
                   onChange={(e) => setEmail(e.target.value)}></input>
               </li>
               <li>
+                {!errors ? <span>{errorEmail}</span> : <span></span>}
+                {!errors ? <span>{errorEmailRequerido}</span> : <span></span>}
+              </li>
+              <li>
                 <label htmlFor="password">Contraseña</label>
                 <input
                   value={password}
@@ -76,6 +141,30 @@ function ProfileScreen(props) {
                   id="password"
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}></input>
+              </li>
+              <li>
+                {!errors ? (
+                  <span>{errorPasswordRequerido}</span>
+                ) : (
+                  <span></span>
+                )}
+                {!errors ? <span>{errorPassword}</span> : <span></span>}
+              </li>
+              <li>
+                <label htmlFor="rePassword">Repetir contraseña</label>
+                <input
+                  type="password"
+                  id="rePassword"
+                  name="rePassword"
+                  onChange={(e) => setRePassword(e.target.value)}></input>
+              </li>
+              <li>
+                {!errors ? (
+                  <span>{errorPasswordRequerido}</span>
+                ) : (
+                  <span></span>
+                )}
+                {!errors ? <span>{errorPasswordComfir}</span> : <span></span>}
               </li>
 
               <li>

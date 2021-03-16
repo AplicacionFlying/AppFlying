@@ -8,17 +8,68 @@ import {
 } from "../actions/productActions";
 
 function ProductsScreen(props) {
+  const [errorNameRequerido, setErrorNameRequerido] = useState("");
+  const [errorpriceRequerido, setErrorPriceRequerido] = useState("");
+  const [errorImagenRequerido, setErrorImagenRequerido] = useState("");
+  const [errorPaisOrigenRequerido, setErrorPaisOrigenRequerido] = useState("");
+  const [
+    errorFechaOrigenIdaRequerido,
+    setErrorFechaOrigenIdaRequerido,
+  ] = useState("");
+  const [
+    errorHoraOrigenIdaRequerido,
+    setErrorHoraOrigenIdaRequerido,
+  ] = useState("");
+  const [errorPaisDestinoRequerido, setErrorPaisDestinoRequerido] = useState(
+    ""
+  );
+  const [
+    errorFechaDestinoIdaRequerido,
+    setErrorFechaDestinoIdaRequerido,
+  ] = useState("");
+  const [
+    errorHoraDestinoIdaRequerido,
+    setErrorHoraDestinoIdaRequerido,
+  ] = useState("");
+  const [
+    errorHoraOrigenVueltaRequerido,
+    setErrorHoraOrigenVueltaRequerido,
+  ] = useState("");
+  const [
+    errorFechaOrigenVueltaRequerido,
+    setErrorFechaOrigenVueltaRequerido,
+  ] = useState("");
+  const [
+    errorHoraDestinoVueltaRequerido,
+    setErrorHoraDestinoVueltaRequerido,
+  ] = useState("");
+  const [
+    errorFechaDestinoVueltaRequerido,
+    setErrorFechaDestinoVueltaRequerido,
+  ] = useState("");
+  const [errorCountInStockRequerido, setErrorCountInStockRequerido] = useState(
+    ""
+  );
+  const [errorDescriptionRequerido, setErrorDescriptionRequerido] = useState(
+    ""
+  );
+  const [errors, setErrors] = useState(false);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [paisOrigen, setOrigen] = useState("");
-  const [horaOrigen, setHoraOrigen] = useState("");
-  const [fechaOrigen, setFechaOrigen] = useState("");
+  const [horaOrigenIda, setHoraOrigenIda] = useState("");
+  const [fechaOrigenIda, setFechaOrigenIda] = useState("");
   const [paisDestino, setDestino] = useState("");
-  const [horaDestino, setHoraDestino] = useState("");
-  const [fechaDestino, setFechaDestino] = useState("");
+  const [horaDestinoIda, setHoraDestinoIda] = useState("");
+  const [fechaDestinoIda, setFechaDestinoIda] = useState("");
+  const [horaOrigenVuelta, setHoraOrigenVuelta] = useState("");
+  const [fechaOrigenVuelta, setFechaOrigenVuelta] = useState("");
+  const [horaDestinoVuelta, setHoraDestinoVuelta] = useState("");
+  const [fechaDestinoVuelta, setFechaDestinoVuelta] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -58,31 +109,46 @@ function ProductsScreen(props) {
     setDescription(product.description);
     setImage(product.image);
     setOrigen(product.paisOrigen);
-    setHoraOrigen(product.horaOrigen);
-    setFechaOrigen(product.fechaOrigen);
+    setHoraOrigenIda(product.horaOrigenIda);
+    setFechaOrigenIda(product.fechaOrigenIda);
     setDestino(product.paisDestino);
-    setHoraDestino(product.horaDestino);
-    setFechaDestino(product.fechaDestino);
+    setHoraDestinoIda(product.horaDestinoIda);
+    setFechaDestinoIda(product.fechaDestinoIda);
     setCountInStock(product.countInStock);
+    setHoraOrigenVuelta(product.horaOrigenVuelta);
+    setFechaOrigenVuelta(product.fechaOrigenVuelta);
+    setHoraDestinoVuelta(product.horaDestinoVuelta);
+    setFechaDestinoVuelta(product.fechaDestinoVuelta);
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      savePaquete({
-        _id: id,
-        name,
-        price,
-        image,
-        paisOrigen,
-        horaOrigen,
-        fechaOrigen,
-        paisDestino,
-        horaDestino,
-        fechaDestino,
-        countInStock,
-        description,
-      })
-    );
+
+    setErrors(validateData());
+    if (!errors) {
+      return;
+    }
+    if (errors) {
+      dispatch(
+        savePaquete({
+          _id: id,
+          name,
+          price,
+          image,
+          paisOrigen,
+          horaOrigenIda,
+          fechaOrigenIda,
+          paisDestino,
+          horaDestinoIda,
+          fechaDestinoIda,
+          countInStock,
+          description,
+          horaOrigenVuelta,
+          fechaOrigenVuelta,
+          horaDestinoVuelta,
+          fechaDestinoVuelta,
+        })
+      );
+    }
   };
   const deleteHandler = (paquete) => {
     dispatch(deletePaquete(paquete._id));
@@ -107,6 +173,90 @@ function ProductsScreen(props) {
         setUploading(false);
       });
   };
+
+  const validateData = () => {
+    setErrorNameRequerido("");
+    setErrorPriceRequerido("");
+    setErrorImagenRequerido("");
+    setErrorPaisOrigenRequerido("");
+    setErrorHoraOrigenIdaRequerido("");
+    setErrorFechaOrigenIdaRequerido("");
+    setErrorPaisDestinoRequerido("");
+    setErrorHoraDestinoIdaRequerido("");
+    setErrorFechaDestinoIdaRequerido("");
+    setErrorHoraOrigenVueltaRequerido("");
+    setErrorFechaOrigenVueltaRequerido("");
+    setErrorHoraDestinoVueltaRequerido("");
+    setErrorFechaDestinoVueltaRequerido("");
+    setErrorCountInStockRequerido("");
+    setErrorDescriptionRequerido("");
+
+    let isValid = true;
+    if (name === "") {
+      setErrorNameRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (price === "") {
+      setErrorPriceRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (image === "") {
+      setErrorImagenRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (paisOrigen === "") {
+      setErrorPaisOrigenRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (horaOrigenIda === "") {
+      setErrorHoraOrigenIdaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (fechaOrigenIda === "") {
+      setErrorFechaOrigenIdaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (paisDestino === "") {
+      setErrorPaisDestinoRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (horaDestinoIda === "") {
+      setErrorHoraDestinoIdaRequerido("Dato necesario *");
+      isValid = false;
+    }
+
+    if (fechaDestinoIda === "") {
+      setErrorFechaDestinoIdaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (horaOrigenVuelta === "") {
+      setErrorHoraOrigenVueltaRequerido("Dato necesario *");
+      isValid = false;
+    }
+
+    if (fechaOrigenVuelta === "") {
+      setErrorFechaOrigenVueltaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (horaDestinoVuelta === "") {
+      setErrorHoraDestinoVueltaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (fechaDestinoVuelta === "") {
+      setErrorFechaDestinoVueltaRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (countInStock === "") {
+      setErrorCountInStockRequerido("Dato necesario *");
+      isValid = false;
+    }
+    if (description === "") {
+      setErrorDescriptionRequerido("Dato necesario *");
+      isValid = false;
+    }
+    return isValid;
+  };
+
   return (
     <div className="content content-margined">
       <div className="product-header">
@@ -116,133 +266,331 @@ function ProductsScreen(props) {
         </button>
       </div>
       {modalVisible && (
-        <div className="form">
-          <form onSubmit={submitHandler}>
-            <ul className="form-container">
-              <li>
-                <h2>Crear paquete de viaje</h2>
-              </li>
-              <li>
-                {loadingSave && <div>Loading...</div>}
-                {errorSave && <div>{errorSave}</div>}
-              </li>
+        <div className="form-product">
+          <div className="form">
+            <form onSubmit={submitHandler}>
+              <ul className="form-container">
+                <li>
+                  <h2>Crear paquete de viaje</h2>
+                </li>
+                <li>
+                  {loadingSave && <div>Loading...</div>}
+                  {errorSave && <div>{errorSave}</div>}
+                </li>
 
-              <li>
-                <label htmlFor="name">Nombre del paquete</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  id="name"
-                  onChange={(e) => setName(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="price">Precio del paquete</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={price}
-                  id="price"
-                  onChange={(e) => setPrice(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="image">Imagen</label>
-                <input
-                  type="text"
-                  name="image"
-                  value={image}
-                  id="image"
-                  onChange={(e) => setImage(e.target.value)}></input>
-                <input type="file" onChange={uploadFileHandler}></input>
-                {uploading && <div>Uploading...</div>}
-              </li>
-              <li>
-                <label htmlFor="origen">Lugar de origen</label>
-                <input
-                  type="text"
-                  name="origen"
-                  value={paisOrigen}
-                  id="origen"
-                  onChange={(e) => setOrigen(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="horaOrigen">Hora de origen</label>
-                <input
-                  type="text"
-                  name="horaOrigen"
-                  value={horaOrigen}
-                  id="horaOrigen"
-                  onChange={(e) => setHoraOrigen(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="fechaOrigen">Fecha de origen</label>
-                <input
-                  type="text"
-                  name="fechaOrigen"
-                  value={fechaOrigen}
-                  id="fechaOrigen"
-                  onChange={(e) => setFechaOrigen(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="destino">Lugar de destino</label>
-                <input
-                  type="text"
-                  name="destino"
-                  value={paisDestino}
-                  id="destino"
-                  onChange={(e) => setDestino(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="horaDestino">Hora de destino</label>
-                <input
-                  type="text"
-                  name="horaDestino"
-                  value={horaDestino}
-                  id="horaDestino"
-                  onChange={(e) => setHoraDestino(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="fechaDestino">Fecha de destino</label>
-                <input
-                  type="text"
-                  name="fechaDestino"
-                  value={fechaDestino}
-                  id="fechaDestino"
-                  onChange={(e) => setFechaDestino(e.target.value)}></input>
-              </li>
-              <li>
-                <label htmlFor="countInStock">CountInStock</label>
-                <input
-                  type="text"
-                  name="countInStock"
-                  value={countInStock}
-                  id="countInStock"
-                  onChange={(e) => setCountInStock(e.target.value)}></input>
-              </li>
+                <li>
+                  <div className="colum-campos">
+                    <div className="two-colums">
+                      <div className="colum">
+                        <li>
+                          <label htmlFor="name">Nombre del paquete</label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={name}
+                            id="name"
+                            onChange={(e) => setName(e.target.value)}></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorNameRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="price">Precio del paquete</label>
+                          <input
+                            type="text"
+                            name="price"
+                            value={price}
+                            id="price"
+                            onChange={(e) => setPrice(e.target.value)}></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorpriceRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="image">Imagen</label>
+                          <input
+                            disabled
+                            type="text"
+                            name="image"
+                            value={image}
+                            id="image"
+                            onChange={(e) => setImage(e.target.value)}></input>
+                          <input
+                            type="file"
+                            onChange={uploadFileHandler}></input>
+                          {uploading && <div>Uploading...</div>}
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorImagenRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="origen">Lugar de origen</label>
+                          <input
+                            type="text"
+                            name="origen"
+                            value={paisOrigen}
+                            id="origen"
+                            onChange={(e) => setOrigen(e.target.value)}></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorPaisOrigenRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="horaOrigenIda">
+                            Hora de origen de ida
+                          </label>
+                          <input
+                            type="text"
+                            name="horaOrigenIda"
+                            value={horaOrigenIda}
+                            id="horaOrigenIda"
+                            onChange={(e) =>
+                              setHoraOrigenIda(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorHoraOrigenIdaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="fechaOrigenIda">
+                            Fecha de origen de ida
+                          </label>
+                          <input
+                            type="text"
+                            name="fechaOrigenIda"
+                            value={fechaOrigenIda}
+                            id="fechaOrigenIda"
+                            onChange={(e) =>
+                              setFechaOrigenIda(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorFechaOrigenIdaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="destino">Lugar de destino</label>
+                          <input
+                            type="text"
+                            name="destino"
+                            value={paisDestino}
+                            id="destino"
+                            onChange={(e) =>
+                              setDestino(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorPaisDestinoRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                      </div>
+                    </div>
 
-              <li>
-                <label htmlFor="description">Descripcion</label>
-                <textarea
-                  name="description"
-                  value={description}
-                  id="description"
-                  onChange={(e) => setDescription(e.target.value)}></textarea>
-              </li>
-              <li>
-                <button type="submit" className="button primary">
-                  {id ? "Update" : "Create"}
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => setModalVisible(false)}
-                  className="button secondary">
-                  Atras
-                </button>
-              </li>
-            </ul>
-          </form>
+                    <div className="two-colums">
+                      <div className="colum">
+                        <li>
+                          <label htmlFor="horaDestinoIda">
+                            Hora de destino de ida
+                          </label>
+                          <input
+                            type="text"
+                            name="horaDestinoIda"
+                            value={horaDestinoIda}
+                            id="horaDestinoIda"
+                            onChange={(e) =>
+                              setHoraDestinoIda(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorHoraDestinoIdaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="fechaDestinoIda">
+                            Fecha de destino de ida
+                          </label>
+                          <input
+                            type="text"
+                            name="fechaDestinoIda"
+                            value={fechaDestinoIda}
+                            id="fechaDestinoIda"
+                            onChange={(e) =>
+                              setFechaDestinoIda(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorFechaDestinoIdaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="countInStock">CountInStock</label>
+                          <input
+                            type="text"
+                            name="countInStock"
+                            value={countInStock}
+                            id="countInStock"
+                            onChange={(e) =>
+                              setCountInStock(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorCountInStockRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+
+                        <li>
+                          <label htmlFor="description">Descripcion</label>
+                          <textarea
+                            name="description"
+                            value={description}
+                            id="description"
+                            onChange={(e) =>
+                              setDescription(e.target.value)
+                            }></textarea>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorDescriptionRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="horaOrigenVuelta">
+                            Hora de origen de vuelta
+                          </label>
+                          <input
+                            type="text"
+                            name="horaOrigenVuelta"
+                            value={horaOrigenVuelta}
+                            id="horaOrigenVuelta"
+                            onChange={(e) =>
+                              setHoraOrigenVuelta(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorHoraOrigenVueltaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="fechaOrigenVuelta">
+                            Fecha de origen de vuelta
+                          </label>
+                          <input
+                            type="text"
+                            name="fechaOrigenVuelta"
+                            value={fechaOrigenVuelta}
+                            id="fechaOrigenVuelta"
+                            onChange={(e) =>
+                              setFechaOrigenVuelta(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorFechaOrigenVueltaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="horaDestinoVuelta">
+                            Hora de destino de vuelta
+                          </label>
+                          <input
+                            type="text"
+                            name="horaDestinoVuelta"
+                            value={horaDestinoVuelta}
+                            id="horaDestinoVuelta"
+                            onChange={(e) =>
+                              setHoraDestinoVuelta(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorHoraDestinoVueltaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li>
+                          <label htmlFor="fechaDestinoVuelta">
+                            Fecha de detino de vuelta
+                          </label>
+                          <input
+                            type="text"
+                            name="fechaDestinoVuelta"
+                            value={fechaDestinoVuelta}
+                            id="fechaDestinoVuelta"
+                            onChange={(e) =>
+                              setFechaDestinoVuelta(e.target.value)
+                            }></input>
+                        </li>
+                        <li>
+                          {!errors ? (
+                            <span>{errorFechaDestinoVueltaRequerido}</span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </li>
+                        <li></li>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button type="submit" className="button primary">
+                    {id ? "Update" : "Create"}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setModalVisible(false)}
+                    className="button secondary">
+                    Atras
+                  </button>
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
       )}
 
@@ -269,11 +617,11 @@ function ProductsScreen(props) {
                 <td>{paquete.name}</td>
                 <td>{paquete.price}</td>
                 <td>{paquete.paisOrigen}</td>
-                <td>{paquete.horaOrigen}</td>
-                <td>{paquete.fechaOrigen}</td>
+                <td>{paquete.horaOrigenIda}</td>
+                <td>{paquete.fechaOrigenIda}</td>
                 <td>{paquete.paisDestino}</td>
-                <td>{paquete.horaDestino}</td>
-                <td>{paquete.fechaDestino}</td>
+                <td>{paquete.horaDestinoVuelta}</td>
+                <td>{paquete.fechaDestinoVuelta}</td>
 
                 <td>
                   <button className="button" onClick={() => openModal(paquete)}>

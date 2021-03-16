@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../actions/userActions";
+import { validateEmail, validarPassword } from "../helpers";
 
 function RegisterScreen(props) {
+  const [errorName, setErrorName] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorEmailRequerido, setErrorEmailRequerido] = useState("");
+  const [errorPasswordRequerido, setErrorPasswordRequerido] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorPasswordComfir, setErrorPasswordComfir] = useState("");
+  const [errors, setErrors] = useState(false);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +35,55 @@ function RegisterScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    setErrors(validateData());
+
+    if (!errors) {
+      return;
+    }
+    if (errors) {
+      dispatch(register(name, email, password));
+    }
   };
+
+  const validateData = () => {
+    setErrorName("");
+    setErrorEmailRequerido("");
+    setErrorEmail("");
+    setErrorPasswordRequerido("");
+    setErrorPassword("");
+    setErrorPasswordComfir("");
+
+    //setErrorPassword("");
+    let isValid = true;
+    if (name === "") {
+      setErrorName("Debe ingresar un nombre");
+      isValid = false;
+    }
+    if (email === "") {
+      setErrorEmailRequerido("Debe ingresar un email");
+      isValid = false;
+    }
+    if (email !== "" && !validateEmail(email)) {
+      setErrorEmail("Debes de ingresar un email válido.");
+      isValid = false;
+    }
+
+    if (password === "") {
+      setErrorPasswordRequerido("Debe ingresar los datos");
+      isValid = false;
+    }
+    if (password !== "" && !validarPassword(password))
+      if (rePassword === "") {
+        setErrorPasswordRequerido("La contraseña debe tener minimo 4 digitos");
+        isValid = false;
+      }
+    if (password !== rePassword) {
+      setErrorPasswordComfir("La contraseña y la confirmación no son iguales.");
+      isValid = false;
+    }
+    return isValid;
+  };
+
   return (
     <div className="form">
       <form onSubmit={submitHandler}>
@@ -47,13 +103,18 @@ function RegisterScreen(props) {
               id="name"
               onChange={(e) => setName(e.target.value)}></input>
           </li>
+          <li>{!errors ? <span>{errorName}</span> : <span></span>}</li>
           <li>
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}></input>
+          </li>
+          <li>
+            {!errors ? <span>{errorEmail}</span> : <span></span>}
+            {!errors ? <span>{errorEmailRequerido}</span> : <span></span>}
           </li>
           <li>
             <label htmlFor="password">Contraseña</label>
@@ -64,12 +125,20 @@ function RegisterScreen(props) {
               onChange={(e) => setPassword(e.target.value)}></input>
           </li>
           <li>
+            {!errors ? <span>{errorPasswordRequerido}</span> : <span></span>}
+            {!errors ? <span>{errorPassword}</span> : <span></span>}
+          </li>
+          <li>
             <label htmlFor="rePassword">Repetir contraseña</label>
             <input
               type="password"
               id="rePassword"
               name="rePassword"
               onChange={(e) => setRePassword(e.target.value)}></input>
+          </li>
+          <li>
+            {!errors ? <span>{errorPasswordRequerido}</span> : <span></span>}
+            {!errors ? <span>{errorPasswordComfir}</span> : <span></span>}
           </li>
           <li>
             <button type="submit" className="button primary">

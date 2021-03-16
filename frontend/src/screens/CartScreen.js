@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { userDaltails } from "../actions/userActions";
 function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
 
@@ -22,6 +23,7 @@ function CartScreen(props) {
   }, []);
 
   const checkoutHandler = () => {
+    dispatch(userDaltails());
     props.history.push("/signin?redirect=shipping");
   };
 

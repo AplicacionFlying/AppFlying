@@ -75,29 +75,64 @@ function ProductScreen(props) {
                 <li>
                   Precio: <b>${paquete.price}</b>
                 </li>
-                <li>
-                  Pais de salida :<div>{paquete.paisOrigen}</div>
-                </li>
-                <li>
-                  Fecha de salida:
-                  <div>{paquete.fechaOrigen}</div>
-                </li>
-                <li>
-                  Hora de salida:
-                  <div>{paquete.horaOrigen}</div>
-                </li>
-                <li>
-                  Pais de destino:
-                  <div>{paquete.paisDestino}</div>
-                </li>
-                <li>
-                  Fecha de llegada:
-                  <div>{paquete.fechaDestino}</div>
-                </li>
-                <li>
-                  Hora de llegada:
-                  <div>{paquete.horaDestino}</div>
-                </li>
+                <div className="two-columns">
+                  <div className="colum">
+                    <li>
+                      <b>Vuelo ida</b>
+                    </li>
+                    <li>
+                      Pais de salida :<div>{paquete.paisOrigen}</div>
+                    </li>
+                    <li>
+                      Fecha de salida:
+                      <div>{paquete.fechaOrigenIda}</div>
+                    </li>
+                    <li>
+                      Hora de salida:
+                      <div>{paquete.horaOrigenIda}</div>
+                    </li>
+                    <li>
+                      Pais de destino:
+                      <div>{paquete.paisDestino}</div>
+                    </li>
+                    <li>
+                      Fecha de llegada:
+                      <div>{paquete.fechaDestinoIda}</div>
+                    </li>
+                    <li>
+                      Hora de llegada:
+                      <div>{paquete.horaDestinoIda}</div>
+                    </li>
+                  </div>
+                  <div className="colum">
+                    <li>
+                      <b>Vuelo vuelta</b>
+                    </li>
+                    <li>
+                      Pais de salida :<div>{paquete.paisDestino}</div>
+                    </li>
+                    <li>
+                      Fecha de salida:
+                      <div>{paquete.fechaOrigenVuelta}</div>
+                    </li>
+                    <li>
+                      Hora de salida:
+                      <div>{paquete.horaOrigenVuelta}</div>
+                    </li>
+                    <li>
+                      Pais de destino:
+                      <div>{paquete.paisDestino}</div>
+                    </li>
+                    <li>
+                      Fecha de llegada:
+                      <div>{paquete.fechaDestinoVuelta}</div>
+                    </li>
+                    <li>
+                      Hora de llegada:
+                      <div>{paquete.horaDestinoVuelta}</div>
+                    </li>
+                  </div>
+                </div>
               </ul>
             </div>
             <div className="details-action">

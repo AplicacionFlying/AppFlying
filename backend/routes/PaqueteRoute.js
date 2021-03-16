@@ -61,24 +61,32 @@ router.post("/:id/reviews", isAuth, async (req, res) => {
   }
 });
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
-  const productId = req.params.id;
-  const product = await Product.findById(productId);
-  if (product) {
-    product.name = req.body.name;
-    product.price = req.body.price;
-    product.image = req.body.image;
-    product.brand = req.body.brand;
-    product.category = req.body.category;
-    product.countInStock = req.body.countInStock;
-    product.description = req.body.description;
-    const updatedProduct = await product.save();
-    if (updatedProduct) {
+  const paqueteId = req.params.id;
+  const paquete = await Paquete.findById(paqueteId);
+  if (paquete) {
+    paquete.name = req.body.name;
+    paquete.price = req.body.price;
+    paquete.image = req.body.image;
+    paquete.countInStock = req.body.countInStock;
+    paquete.description = req.body.description;
+    paquete.paisOrigen = req.body.paisOrigen;
+    paquete.horaOrigenIda = req.body.horaOrigenIda;
+    paquete.fechaOrigenIda = req.body.fechaOrigenIda;
+    paquete.paisDestino = req.body.paisDestino;
+    paquete.horaDestinoIda = req.body.horaDestinoIda;
+    paquete.fechaDestinoIda = req.body.fechaDestinoIda;
+    paquete.horaOrigenVuelta = req.body.horaOrigenVuelta;
+    paquete.fechaOrigenVuelta = req.body.fechaOrigenVuelta;
+    paquete.horaDestinoVuelta = req.body.horaDestinoVuelta;
+    paquete.fechaDestinoVuelta = req.body.fechaDestinoVuelta;
+    const updatedPaquete = await paquete.save();
+    if (updatedPaquete) {
       return res
         .status(200)
-        .send({ message: "Product Updated", data: updatedProduct });
+        .send({ message: "Paquete Updated", data: updatedPaquete });
     }
   }
-  return res.status(500).send({ message: " Error in Updating Product." });
+  return res.status(500).send({ message: " Error in Updating Paquete." });
 });
 
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
@@ -93,7 +101,7 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
 
 //Ingresar un nuevo
 
-router.post("/", async (req, res) => {
+router.post("/", isAuth, isAdmin, async (req, res) => {
   const paquete = new Paquete({
     name: req.body.name,
     price: req.body.price,
@@ -103,17 +111,21 @@ router.post("/", async (req, res) => {
     rating: req.body.rating,
     numReviews: req.body.numReviews,
     paisOrigen: req.body.paisOrigen,
-    fechaOrigen: req.body.fechaOrigen,
-    horaOrigen: req.body.horaOrigen,
+    fechaOrigenIda: req.body.fechaOrigenIda,
+    horaOrigenIda: req.body.horaOrigenIda,
     paisDestino: req.body.paisDestino,
-    fechaDestino: req.body.fechaDestino,
-    horaDestino: req.body.horaDestino,
+    fechaDestinoIda: req.body.fechaDestinoIda,
+    horaDestinoIda: req.body.horaDestinoIda,
+    fechaOrigenVuelta: req.body.fechaOrigenVuelta,
+    horaOrigenVuelta: req.body.horaOrigenVuelta,
+    fechaDestinoVuelta: req.body.fechaDestinoVuelta,
+    horaDestinoVuelta: req.body.horaDestinoVuelta,
   });
   const newPaquete = await paquete.save();
   if (newPaquete) {
     return res
       .status(201)
-      .send({ message: "Nuevo producto creado", data: newPaquete });
+      .send({ message: "Nuevo paquete creado", data: newPaquete });
   }
   return res.status(500).send({ message: " Error en crear el Paquete." });
 });

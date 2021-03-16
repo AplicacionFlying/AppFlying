@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
+//import { userDaltails } from "../actions/userActions";
+
 function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
+
   const { loading, success, error, order } = orderCreate;
+  const user = useSelector((state) => state.userDetails);
 
   const { cartItems, shipping, payment } = cart;
   if (!shipping.address) {
@@ -35,22 +39,27 @@ function PlaceOrderScreen(props) {
       })
     );
   };
+
   useEffect(() => {
+    //dispatch(userDaltails());
     if (success) {
       props.history.push("/order/" + order._id);
     }
   }, [success]);
-
+  console.log(user);
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="placeorder">
         <div className="placeorder-info">
           <div>
-            <h3>Ubicacion</h3>
+            <h3>Datos personales</h3>
             <div>
               {cart.shipping.address}, {cart.shipping.city},
               {cart.shipping.postalCode}, {cart.shipping.country},
+            </div>
+            <div>
+              {user.userDetails.name}, {user.userDetails.email}
             </div>
           </div>
           <div>

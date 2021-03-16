@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../actions/userActions";
-
+import { validateEmail } from "../helpers";
+//import { userDaltails } from "../actions/userActions";
 function SigninScreen(props) {
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errors, setError] = useState(false);
+  const [errorEmailVacio, setErrorEmailVacio] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
@@ -23,8 +28,64 @@ function SigninScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+
+    setError(validateData());
+
+    if (!errors) {
+      return;
+    }
+    if (errors) {
+      dispatch(signin(email, password));
+      // setTimeout(function () {
+      //   dispatch(userDaltails());
+      // }, 5000);
+    }
   };
+
+  const validateData = () => {
+    setErrorEmailVacio("");
+    setErrorPassword("");
+    setErrorEmail("");
+    //setErrorPassword("");
+    let isValid = true;
+
+    if (email === "") {
+      setErrorEmailVacio("Debe ingresar los datos");
+      isValid = false;
+    }
+    if (email !== "" && !validateEmail(email)) {
+      setErrorEmail("Debes de ingresar un email válido.");
+      isValid = false;
+    }
+
+    if (password === "") {
+      setErrorPassword("Debe ingresar los datos");
+      isValid = false;
+    }
+
+    // if (size(password) < 6) {
+    //   setErrorPassword(
+    //     "Debes ingresar una contraseña de al menos seis carácteres."
+    //   );
+    //   isValid = false;
+    // }
+
+    // if (size(formData.confirm) < 6) {
+    //   setErrorConfirm(
+    //     "Debes ingresar una confirmación de contraseña de al menos seis carácteres."
+    //   );
+    //   isValid = false;
+    // }
+
+    // if (formData.password !== formData.confirm) {
+    //   setErrorPassword("La contraseña y la confirmación no son iguales.");
+    //   setErrorConfirm("La contraseña y la confirmación no son iguales.");
+    //   isValid = false;
+    // }
+
+    return isValid;
+  };
+
   return (
     <div className="form">
       <form onSubmit={submitHandler}>
@@ -39,10 +100,14 @@ function SigninScreen(props) {
           <li>
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}></input>
+          </li>
+          <li>
+            {!errors ? <span>{errorEmail}</span> : <span></span>}
+            {!errors ? <span>{errorEmailVacio}</span> : <span></span>}
           </li>
           <li>
             <label htmlFor="password">Contraseña</label>
@@ -52,6 +117,7 @@ function SigninScreen(props) {
               name="password"
               onChange={(e) => setPassword(e.target.value)}></input>
           </li>
+          <li>{!errors ? <span>{errorPassword}</span> : <span></span>}</li>
           <li>
             <button type="submit" className="button primary">
               Aceptar
