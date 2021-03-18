@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { listProducts } from '../actions/productActions';
-import Rating from '../components/Rating';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { listPaquetes } from "../actions/productActions";
+import Rating from "../components/Rating";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function HomeScreen(props) {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const category = props.match.params.id ? props.match.params.id : '';
-  const productList = useSelector((state) => state.productList);
-  const { products, loading, error } = productList;
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const category = props.match.params.id ? props.match.params.id : "";
+  const paqueteList = useSelector((state) => state.paqueteList);
+  const { paquetes, loading, error } = paqueteList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts(category));
+    dispatch(listPaquetes());
 
     return () => {
       //
     };
-  }, [category]);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(listProducts(category, searchKeyword, sortOrder));
+    // dispatch(listProducts(category, searchKeyword, sortOrder));
   };
   const sortHandler = (e) => {
     setSortOrder(e.target.value);
-    dispatch(listProducts(category, searchKeyword, sortOrder));
+    // dispatch(listProducts(category, searchKeyword, sortOrder));
   };
 
   return (
+    <div className="homefondo">
     <>
       {category && <h2>{category}</h2>}
 
@@ -40,56 +42,109 @@ function HomeScreen(props) {
               name="searchKeyword"
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
-            <button type="submit">Search</button>
+            <button type="submit">Buscar</button>
           </form>
         </li>
         <li>
-          Sort By{' '}
+          {" "}
           <select name="sortOrder" onChange={sortHandler}>
-            <option value="">Newest</option>
-            <option value="lowest">Lowest</option>
-            <option value="highest">Highest</option>
+            <option value="">Mas nuevo</option>
+            <option value="lowest">Mas bajo</option>
+            <option value="highest">Mas alto</option>
           </select>
         </li>
       </ul>
       {loading ? (
-        <div>Cargando...</div>
+        <div>Loading...</div>
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <ul className="products">
-          {products.map((product) => (
-            <li key={product._id}>
-              <div className="product">
-                <Link to={'/product/' + product._id}>
+        <ul className="paquetes">
+          {paquetes.map((paquete) => (
+            <li key={paquete._id}>
+              <div className="paquete">
+                <Link to={"/product/" + paquete._id}>
                   <img
-                    className="product-image"
-                    src={product.image}
+                    className="paquete-image"
+                    src={paquete.image}
                     alt="product"
                   />
                 </Link>
-                <div className="product-name">
-                  <Link to={'/product/' + product._id}>{product.name}</Link>
+                <div className="paquete-name">
+                  <Link to={"/product/" + paquete._id}>
+                    Argentina a {paquete.name}
+                  </Link>
                 </div>
-                <div className="product-price">${product.price}</div>
-                <div className="product-origen">{product.origen}</div>
-                <div className="product-horaOrigen">{product.horaOrigen}</div>
-                <div className="product-fechaOrigen">{product.fechaOrigen}</div>
-                <div className="product-destino">{product.destino}</div>
-                <div className="product-horaDestino">{product.horaDestino}</div>
-                <div className="product-fechaDestino">{product.fechaDestino}</div>
-                <div className="product-rating">
-                  <Rating
-                    value={product.rating}
-                    text={product.numReviews + ' reviews'}
-                  />
+
+                <div className="paquete-brand">{paquete.description}</div>
+
+                <div className="paquete-price">${paquete.price}</div>
+                <div className="two-columns">
+                  <div className="colum">
+                    <div className="paquete-name-colum">Ida</div>
+                    <div>
+                      <span>Salida</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisOrigen}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaOrigenIda}
+                    </div>
+                    <div className="paquete-brand">{paquete.horaOrigenIda}</div>
+                    <div>
+                      <span>Llegada</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisDestino}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaDestinoIda}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaDestinoIda}
+                    </div>
+                    <div className="paquete-rating">
+                      <Rating
+                      // value={product.rating}
+                      // text={product.numReviews + " reviews"}
+                      />
+                    </div>
+                  </div>
+                  <div className="colum">
+                    <div className="paquete-name-colum">Vuelta</div>
+                    <div>
+                      <span>Salida</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisDestino}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaOrigenVuelta}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaOrigenVuelta}
+                    </div>
+                    <div>
+                      <span>Llegada</span>
+                    </div>
+                    <div className="paquete-brand">{paquete.paisOrigen}</div>
+                    <div className="paquete-brand">
+                      {paquete.fechaDestinoVuelta}
+                    </div>
+                    <div className="paquete-brand">
+                      {paquete.horaDestinoVuelta}
+                    </div>
+                    <div className="paquete-rating">
+                      <Rating
+                      // value={product.rating}
+                      // text={product.numReviews + " reviews"}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
           ))}
         </ul>
+        
       )}
     </>
+    </div>
   );
 }
 export default HomeScreen;

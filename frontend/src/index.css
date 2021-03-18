@@ -19,9 +19,9 @@ button {
 .grid-container {
   display: grid;
   grid-template-areas:
-    'header'
-    'main'
-    'footer';
+    "header"
+    "main"
+    "footer";
   grid-template-columns: 1fr;
   grid-template-rows: 5rem 1fr 5rem;
   height: 100%;
@@ -41,13 +41,20 @@ button {
   font-weight: bold;
   text-decoration: none;
 }
+@font-face{
+  font-family:fuente;
+  src:url(letra1.otf);
+}
 .header-links a {
+  font-family:fuente;
   color: #ffffff;
   text-decoration: none;
   padding: 1rem;
+  font-size: 2.5rem;
 }
 .header-links a:hover {
-  color: #ff8000;
+  color: #cea124;
+  text-decoration: none;
 }
 .main {
   grid-area: main;
@@ -67,43 +74,56 @@ a:hover {
   color: #ff8000;
 }
 /* Home Screen */
-.products {
+.two-columns {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+
+.paquetes {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  border: 1px #000000;
 }
-.products li {
+.paquetes li {
   list-style-type: none;
-  padding: 0;
+  padding: 3px;
   flex: 0 1 34rem;
   margin: 1rem;
   height: 50rem;
   border-bottom: 0.1rem #c0c0c0 solid;
+
+  box-shadow: 5px 10px 20px 1px rgb(0, 0, 0, 0.25);
 }
-.product {
+.paquete {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-.product-name {
+.paquete-name {
   font-size: 2rem;
   font-weight: bold;
 }
-.product-brand {
+.paquete-name-colum {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.paquete-brand {
   font-size: 1.2rem;
   color: #808080;
 }
-.product-price {
+.paquete-price {
   font-size: 2rem;
   font-weight: bold;
 }
-.product-image {
-  max-width: 34rem;
-  max-height: 34rem;
+.paquete-image {
+  width: 34rem;
+  height: 20rem;
 }
-.product-rating {
+.paquete-rating {
   margin-bottom: 1rem;
 }
 /* Reviews */
@@ -281,23 +301,75 @@ a > .rating > span:last-child {
   font-size: 2.5rem;
   text-align: right;
 }
-
-/* forms */
-
-.form {
+/* forms producto */
+.form-product .two-columns {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  display: flex;
+}
+.form-product .form-container .colum-campos {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-left: 15%;
+}
+.form-product .form {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
+.form-product .form-container {
+  display: flex;
+  flex-direction: column;
+  width: 70rem;
+  height: 100%;
+  padding: 0;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+  text-align: center;
+}
+.form-product .form-container li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.form-product input {
+  padding: 1rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  width: 225px !important;
+}
+
+/* forms */
+
+.form {
+  background-image: url("/images/avionfondo.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
 .form-container {
   display: flex;
   flex-direction: column;
   width: 32rem;
-  padding: 2rem;
-  border: 0.1rem #c0c0c0 solid;
+  padding: 5.3rem;
+  border: 0.1rem #282c34 solid;
   border-radius: 0.5rem;
   list-style-type: none;
+}
+.form-container h2{
+  color:  #282c34; 
+  text-align: center;
+  font-family: fuente;
+  font-size: 2.5rem;
+
 }
 .form-container li {
   display: flex;
@@ -437,7 +509,6 @@ tbody > tr:nth-child(odd) {
 .filter {
   display: flex;
   list-style-type: none;
-  padding: 0;
   margin: 1rem auto;
   max-width: 45rem;
   justify-content: space-between;
@@ -463,3 +534,8 @@ tbody > tr:nth-child(odd) {
 .categories a:hover {
   background-color: #c0c0c0;
 }
+.payment{
+  padding: 12rem;
+
+}
+

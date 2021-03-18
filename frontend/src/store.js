@@ -1,19 +1,20 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import Cookie from 'js-cookie';
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import Cookie from "js-cookie";
 import {
-  productListReducer,
-  productDetailsReducer,
-  productSaveReducer,
-  productDeleteReducer,
+  paqueteListReducer,
+  paqueteDetailsReducer,
+  paqueteSaveReducer,
+  paqueteDeleteReducer,
   productReviewSaveReducer,
-} from './reducers/productReducers';
-import { cartReducer } from './reducers/cartReducers';
+} from "./reducers/productReducers";
+import { cartReducer } from "./reducers/cartReducers";
 import {
   userSigninReducer,
   userRegisterReducer,
   userUpdateReducer,
-} from './reducers/userReducers';
+  userDetailsReducer,
+} from "./reducers/userReducers";
 import {
   orderCreateReducer,
   orderDetailsReducer,
@@ -21,23 +22,24 @@ import {
   myOrderListReducer,
   orderListReducer,
   orderDeleteReducer,
-} from './reducers/orderReducers';
+} from "./reducers/orderReducers";
 
-const cartItems = Cookie.getJSON('cartItems') || [];
-const userInfo = Cookie.getJSON('userInfo') || null;
+const cartItems = Cookie.getJSON("cartItems") || [];
+const userInfo = Cookie.getJSON("userInfo") || null;
 
 const initialState = {
   cart: { cartItems, shipping: {}, payment: {} },
   userSignin: { userInfo },
 };
 const reducer = combineReducers({
-  productList: productListReducer,
-  productDetails: productDetailsReducer,
+  paqueteList: paqueteListReducer,
+  paqueteDetails: paqueteDetailsReducer,
   cart: cartReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
-  productSave: productSaveReducer,
-  productDelete: productDeleteReducer,
+  userDetails: userDetailsReducer,
+  paqueteSave: paqueteSaveReducer,
+  paqueteDelete: paqueteDeleteReducer,
   productReviewSave: productReviewSaveReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
