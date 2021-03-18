@@ -36,21 +36,21 @@ function OrderScreen(props) {
       <div className="placeorder">
         <div className="placeorder-info">
           <div>
-            <h3>Ubicacion</h3>
+            <h3>Datos personales</h3>
             <div>
               {order.shipping.address}, {order.shipping.city},
               {order.shipping.postalCode}, {order.shipping.country},
             </div>
-            <div>
+            {/* <div>
               {order.isDelivered
                 ? "Delivered at " + order.deliveredAt
                 : "Not Delivered."}
-            </div>
+            </div> */}
           </div>
           <div>
             <h3>Pago</h3>
             <div>Metodo de pago: {order.payment.paymentMethod}</div>
-            <div>{order.isPaid ? "Paid at " + order.paidAt : "Not Paid."}</div>
+            {/* <div>{order.isPaid ? "Paid at " + order.paidAt : "Not Paid."}</div> */}
           </div>
           <div>
             <ul className="cart-list-container">

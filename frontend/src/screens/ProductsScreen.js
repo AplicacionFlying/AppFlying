@@ -260,7 +260,7 @@ function ProductsScreen(props) {
   return (
     <div className="content content-margined">
       <div className="product-header">
-        <h3>Paquetes</h3>
+        <h3></h3>
         <button className="button primary" onClick={() => openModal({})}>
           Crear paquete
         </button>
