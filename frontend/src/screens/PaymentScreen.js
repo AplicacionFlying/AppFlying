@@ -19,6 +19,7 @@ function PaymentScreen(props) {
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className="form">
         <form onSubmit={submitHandler}>
+          <div className="payment">
           <ul className="form-container">
             <li>
               <h2>Pago</h2>
@@ -35,16 +36,18 @@ function PaymentScreen(props) {
                 <label for="paymentMethod">Paypal</label>
               </div>
             </li>
-
+            
             <li>
               <button type="submit" className="button primary">
                 Continuar
               </button>
             </li>
           </ul>
+          </div>
         </form>
       </div>
     </div>
+   
   );
 }
 export default PaymentScreen;

@@ -91,7 +91,7 @@ function SigninScreen(props) {
       <form onSubmit={submitHandler}>
         <ul className="form-container">
           <li>
-            <h2>Login</h2>
+            <h2>Iniciar sesion</h2>
           </li>
           <li>
             {loading && <div>Loading...</div>}

@@ -41,14 +41,20 @@ button {
   font-weight: bold;
   text-decoration: none;
 }
+@font-face{
+  font-family:fuente;
+  src:url(letra1.otf);
+}
 .header-links a {
+  font-family:fuente;
   color: #ffffff;
   text-decoration: none;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 .header-links a:hover {
-  color: #ff8000;
+  color: #cea124;
+  text-decoration: none;
 }
 .main {
   grid-area: main;
@@ -342,19 +348,28 @@ a > .rating > span:last-child {
 /* forms */
 
 .form {
+  background-image: url("/images/avionfondo.png");
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+
 }
 .form-container {
   display: flex;
   flex-direction: column;
   width: 32rem;
-  padding: 2rem;
-  border: 0.1rem #c0c0c0 solid;
+  padding: 5.3rem;
+  border: 0.1rem #282c34 solid;
   border-radius: 0.5rem;
   list-style-type: none;
+}
+.form-container h2{
+  color:  #282c34; 
+  text-align: center;
+  font-family: fuente;
+  font-size: 2.5rem;
+
 }
 .form-container li {
   display: flex;
@@ -494,7 +509,6 @@ tbody > tr:nth-child(odd) {
 .filter {
   display: flex;
   list-style-type: none;
-  padding: 0;
   margin: 1rem auto;
   max-width: 45rem;
   justify-content: space-between;
@@ -520,3 +534,8 @@ tbody > tr:nth-child(odd) {
 .categories a:hover {
   background-color: #c0c0c0;
 }
+.payment{
+  padding: 12rem;
+
+}
+

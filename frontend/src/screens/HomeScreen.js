@@ -31,6 +31,7 @@ function HomeScreen(props) {
   };
 
   return (
+    <div className="homefondo">
     <>
       {category && <h2>{category}</h2>}
 
@@ -140,8 +141,10 @@ function HomeScreen(props) {
             </li>
           ))}
         </ul>
+        
       )}
     </>
+    </div>
   );
 }
 export default HomeScreen;
