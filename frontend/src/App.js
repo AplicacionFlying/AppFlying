@@ -14,6 +14,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import OrdersScreen from "./screens/OrdersScreen";
+import Dashboard from "./screens/Dashboard";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -31,7 +32,9 @@ function App() {
         <header className="header">
           <div className="brand">
             {/* <button onClick={openMenu}>&#9776;</button> */}
-            <Link to="/"><img src="/images/LOGON.png"></img></Link>
+            <Link to="/">
+              <img src="/images/LOGON.png"></img>
+            </Link>
           </div>
           <div className="header-links">
             <a href="/cart">Pasajes</a>
@@ -47,6 +50,7 @@ function App() {
                   <li>
                     <Link to="/orders">Ventas</Link>
                     <Link to="/products">Paquetes</Link>
+                    <Link to="/dashboard">Visualizaciones</Link>
                   </li>
                 </ul>
               </div>
@@ -82,6 +86,7 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={HomeScreen} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>

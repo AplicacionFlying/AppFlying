@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../actions/userActions";
 import { validateEmail } from "../helpers";
+import { listOrders } from "../actions/orderActions";
 //import { userDaltails } from "../actions/userActions";
 function SigninScreen(props) {
   const [errorEmail, setErrorEmail] = useState("");
@@ -35,6 +36,7 @@ function SigninScreen(props) {
       return;
     }
     if (errors) {
+      dispatch(listOrders());
       dispatch(signin(email, password));
       // setTimeout(function () {
       //   dispatch(userDaltails());

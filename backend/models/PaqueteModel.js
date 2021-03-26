@@ -28,6 +28,7 @@ const paqueteSchema = new mongoose.Schema({
   horaOrigenVuelta: { type: String, requiere: true },
   fechaDestinoVuelta: { type: String, requiere: true },
   horaDestinoVuelta: { type: String, requiere: true },
+  soldCount: { type: Number, required: true },
 
   reviews: [reviewSchema],
 });

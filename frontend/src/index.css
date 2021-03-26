@@ -1,3 +1,57 @@
+/* Graficos*/
+.dashboard-content {
+  flex: 4 1 80rem;
+  padding: 1rem;
+}
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+.summary-items {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+.summary-items > li {
+  border: 0.1rem #c0c0c0 solid;
+  margin: 2rem;
+  border-radius: 0.5rem;
+  flex: 1 1 20rem;
+}
+.summary-title {
+  background-color: #e0e0e0;
+  font-size: 2rem;
+  padding: 1rem;
+}
+.summary-body {
+  font-size: 4rem;
+  padding: 1rem;
+  text-align: center;
+}
+.summary-title.color1 {
+  background-color: #f0e0e0;
+}
+.summary-title.color2 {
+  background-color: #e0f0e0;
+}
+.summary-title.color3 {
+  background-color: #e0e0f0;
+}
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.tamañoGrafico {
+  height: 300px;
+  width: 600px;
+}
+
 html {
   font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
   box-sizing: border-box;
@@ -41,12 +95,12 @@ button {
   font-weight: bold;
   text-decoration: none;
 }
-@font-face{
-  font-family:fuente;
-  src:url(letra1.otf);
+@font-face {
+  font-family: fuente;
+  src: url(letra1.otf);
 }
 .header-links a {
-  font-family:fuente;
+  font-family: fuente;
   color: #ffffff;
   text-decoration: none;
   padding: 1rem;
@@ -353,7 +407,6 @@ a > .rating > span:last-child {
   justify-content: center;
   align-items: center;
   height: 100%;
-
 }
 .form-container {
   display: flex;
@@ -364,12 +417,11 @@ a > .rating > span:last-child {
   border-radius: 0.5rem;
   list-style-type: none;
 }
-.form-container h2{
-  color:  #282c34; 
+.form-container h2 {
+  color: #282c34;
   text-align: center;
   font-family: fuente;
   font-size: 2.5rem;
-
 }
 .form-container li {
   display: flex;
@@ -534,8 +586,6 @@ tbody > tr:nth-child(odd) {
 .categories a:hover {
   background-color: #c0c0c0;
 }
-.payment{
+.payment {
   padding: 12rem;
-
 }
-

@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React, { isValidElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
+import {
+  savePaquete,
+  listPaquetes,
+  deletePaquete,
+} from "../actions/productActions";
 //import { userDaltails } from "../actions/userActions";
 
 function PlaceOrderScreen(props) {
@@ -22,7 +27,10 @@ function PlaceOrderScreen(props) {
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
+  const itenPut = cartItems.map((ite) => ite.product);
+  const intItePut = itenPut[0];
+  console.log("itenPut");
+  console.log(intItePut);
   const dispatch = useDispatch();
 
   const placeOrderHandler = () => {
@@ -36,6 +44,11 @@ function PlaceOrderScreen(props) {
         shippingPrice,
         taxPrice,
         totalPrice,
+      })
+    );
+    dispatch(
+      savePaquete({
+        _id: intItePut,
       })
     );
   };

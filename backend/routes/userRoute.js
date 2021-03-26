@@ -53,12 +53,20 @@ router.post("/signin", async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
+  signinUser.name = signinUser.name;
+  signinUser.email = signinUser.email;
+  signinUser.password = signinUser.password;
+
+  signinUser.loginCount = signinUser.loginCount + 1;
+  signinUser.save();
+
   if (signinUser) {
     res.send({
       _id: signinUser.id,
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
+      loginCount: signinUser.loginCount,
       token: getToken(signinUser),
     });
   } else {

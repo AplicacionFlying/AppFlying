@@ -60,6 +60,35 @@ router.post("/:id/reviews", isAuth, async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
+router.put("/toto/:nombre", isAuth, isAdmin, async (req, res) => {
+  const paqueteNombre = req.params.id;
+  const paquete = await Paquete.findOne(paqueteNombre);
+  if (paquete) {
+    paquete.name = req.body.name;
+    paquete.price = req.body.price;
+    paquete.image = req.body.image;
+    paquete.countInStock = req.body.countInStock;
+    paquete.description = req.body.description;
+    paquete.paisOrigen = req.body.paisOrigen;
+    paquete.horaOrigenIda = req.body.horaOrigenIda;
+    paquete.fechaOrigenIda = req.body.fechaOrigenIda;
+    paquete.paisDestino = req.body.paisDestino;
+    paquete.horaDestinoIda = req.body.horaDestinoIda;
+    paquete.fechaDestinoIda = req.body.fechaDestinoIda;
+    paquete.horaOrigenVuelta = req.body.horaOrigenVuelta;
+    paquete.fechaOrigenVuelta = req.body.fechaOrigenVuelta;
+    paquete.horaDestinoVuelta = req.body.horaDestinoVuelta;
+    paquete.fechaDestinoVuelta = req.body.fechaDestinoVuelta;
+    paquete.soldCount = paquete.soldCount + 1;
+    const updatedPaquete = await paquete.save();
+    if (updatedPaquete) {
+      return res
+        .status(200)
+        .send({ message: "Paquete Updated", data: updatedPaquete });
+    }
+  }
+  return res.status(500).send({ message: " Error in Updating Paquete." });
+});
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
   const paqueteId = req.params.id;
   const paquete = await Paquete.findById(paqueteId);
@@ -79,6 +108,7 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
     paquete.fechaOrigenVuelta = req.body.fechaOrigenVuelta;
     paquete.horaDestinoVuelta = req.body.horaDestinoVuelta;
     paquete.fechaDestinoVuelta = req.body.fechaDestinoVuelta;
+    paquete.soldCount = paquete.soldCount + 1;
     const updatedPaquete = await paquete.save();
     if (updatedPaquete) {
       return res
@@ -120,6 +150,7 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
     horaOrigenVuelta: req.body.horaOrigenVuelta,
     fechaDestinoVuelta: req.body.fechaDestinoVuelta,
     horaDestinoVuelta: req.body.horaDestinoVuelta,
+    soldCount: 0,
   });
   const newPaquete = await paquete.save();
   if (newPaquete) {
