@@ -26,10 +26,12 @@ import {
 
 const cartItems = Cookie.getJSON("cartItems") || [];
 const userInfo = Cookie.getJSON("userInfo") || null;
+const ordesCookie = Cookie.getJSON("orders") || null;
 
 const initialState = {
   cart: { cartItems, shipping: {}, payment: {} },
   userSignin: { userInfo },
+  order: { ordesCookie },
 };
 const reducer = combineReducers({
   paqueteList: paqueteListReducer,

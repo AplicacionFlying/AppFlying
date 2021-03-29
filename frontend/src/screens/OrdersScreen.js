@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { listOrders, deleteOrder } from "../actions/orderActions";
-
+import Cookie from "js-cookie";
 function OrdersScreen(props) {
   const orderList = useSelector((state) => state.orderList);
   const { loading, orders, error } = orderList;
-
+  Cookie.set("orders", JSON.stringify(orders));
   const orderDelete = useSelector((state) => state.orderDelete);
   const {
     loading: loadingDelete,

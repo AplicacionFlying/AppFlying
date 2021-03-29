@@ -17,13 +17,13 @@
   margin: 0;
 }
 .summary-items > li {
-  border: 0.1rem #c0c0c0 solid;
+  border: 0.1rem #5f4343 solid;
   margin: 2rem;
   border-radius: 0.5rem;
   flex: 1 1 20rem;
 }
 .summary-title {
-  background-color: #e0e0e0;
+  background-color: #39a03e;
   font-size: 2rem;
   padding: 1rem;
 }
@@ -33,13 +33,13 @@
   text-align: center;
 }
 .summary-title.color1 {
-  background-color: #f0e0e0;
+  background-color: #c01f1f;
 }
 .summary-title.color2 {
-  background-color: #e0f0e0;
+  background-color: #a0f1a0;
 }
 .summary-title.color3 {
-  background-color: #e0e0f0;
+  background-color: #fd8080;
 }
 .charts {
   display: flex;

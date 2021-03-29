@@ -13,6 +13,7 @@ function Dashboard(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // dispatch(listOrders());
     dispatch(listPaquetes());
 
     return () => {
@@ -100,10 +101,10 @@ function Dashboard(props) {
             <li>
               <div className="summary-title color3">
                 <span>
-                  <i className="fa fa-users"></i> Total
+                  <i className="fa fa-users"></i> Total ganado
                 </span>
               </div>
-              <div className="summary-body">{priceTotal}</div>
+              <div className="summary-body">${priceTotal}</div>
             </li>
           </ul>
           <ul className="summary-items">
@@ -114,7 +115,7 @@ function Dashboard(props) {
                   options={{
                     title: {
                       display: true,
-                      text: "Cantidad de paquetes",
+                      text: "Cantidad de paquetes disponibles",
                       fontSize: 20,
                     },
                     legend: {
